@@ -71,7 +71,7 @@ if(!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"] === true){
                 <div class="row align-items-center">
 
                     <div class="col-11 col-xl-2" style="flex: 0 0 40.66667%; max-width: 40.66667%">
-                        <h1 class="mb-0 site-logo"><a href="index.html" class="text-black h2 mb-0">Result Management System<span class="text-primary">.</span> </a></h1>
+                        <h1 class="mb-0 site-logo"><a href="index.php" class="text-black h2 mb-0">Result Management System<span class="text-primary">.</span> </a></h1>
                     </div>
                     <div class="col-12 col-md-10 d-none d-xl-block" style="flex: 0 0 58.33333%; max-width: 58.33333%">
                         <nav class="site-navigation position-relative text-right" role="navigation">
