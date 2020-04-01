@@ -2,13 +2,13 @@
 
 // Initialize the session
 session_start();
+
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if (!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"] === true) {
-    header("location: ../index.php");
+if(!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"] === true){
+    header("location: index.php");
     exit;
-} 
-if ($_SESSION["isadmin"] == 0) {
-    header("location: ../viewResults.php");
+} else if($_SESSION["isadmin"]){
+    header("location: admin/viewUsers.php");
     exit;
 }
 
@@ -16,26 +16,19 @@ if ($_SESSION["isadmin"] == 0) {
 <html>
 
 <head>
-    
-<title>Create Department</title>
+    <title>Results</title>
 
-<!-- Navbar -->
+    <link rel="stylesheet" href="viewResults.css">
+     <!-- Navbar -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
-<link rel="stylesheet" href="../fonts/icomoon/style.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/navbarStyle.css">
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/navbarStyle.css">
 <!-- Navbar ends -->
-
-    <style>
-    </style>
-    <title>Results</title>
-    <link rel="stylesheet" href="moveResults.css">
 </head>
-
-<!-- Navbar -->
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -84,26 +77,13 @@ if ($_SESSION["isadmin"] == 0) {
                         <nav class="site-navigation position-relative text-right" role="navigation">
 
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                                <li><a href="#home-section" class="nav-link">Home</a></li>
-                                <li><a href="./moveResults.php" class="nav-link">Results</a></li>
-                                <li class="has-children">
-                                    <a href="" class="nav-link">Departments</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./viewDepts.php">View Departments</a></li>
-                                        <li><a href="./createDept.php">Add Department</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-children">
-                                    <a href="" class="nav-link">Users</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./viewUsers.php">View Users</a></li>
-                                        <li><a href="./createUser.php">Add Users</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="index.php" class="nav-link">Home</a></li>
+                                <li><a href="viewResults.php" class="nav-link">Results</a></li>
+                                <li> <a href="viewDepts.php" class="nav-link">Departments</a></li>
                                 <li class="has-children"><a href="" class="nav-link">My Account</a>
                                     <ul class="dropdown">
-                                        <li><a href="../changePassword.php">Change Password</a></li>
-                                        <li><a href="../logout.php">Logout</a></li>
+                                        <li><a href="changePassword.php">Change Password</a></li>
+                                        <li><a href="logout.php">Logout</a></li>
                                     </ul></li>
                             </ul>
                         </nav>
@@ -116,38 +96,43 @@ if ($_SESSION["isadmin"] == 0) {
 
         </header>
 
-    </div> <!-- .site-wrap -->
 
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <!-- Navbar ends -->
+		<!-- categories section -->
+		<section id="about">
+			<div class="container">
+				<div class="section-title pt-5">
+					<h1>University Of Mumbai</h1>
+					<p>The University of Mumbai is one of the oldest and premier Universities of India. I am honoured and greatly privileged to lead this great
+						 Institution; and continue to address the imminent challenges and to harness theovert and covert opportunities, in order to satisfy our stake 
+						 holders. A unique of its kind, currently the University has 56 Departments, 12 specialized Centres, 781 Affiliated Colleges, 2 main Campuses, 2
+                         sub Campuses, 2 Model Colleges, and the ‘School of Engineering and Applied Sciences’ at Kalyan as the University’s own Engineering College.</p><br>
+                    
+                         <img src="images/mumbai_university.jpg" alt="">
+                </div>
+                <br><br><br><br>
+                <div>
+                    
+                <h2>Campuses</h2><br><br>
+                <h3>Kalina Campus</h3>
+<p>The Kalina campus in suburban Mumbai covers an area of 93 hectares (230 acres) and houses graduate training and research centres. Departments offering courses in the sciences, technology, commerce, and humanities are located here. Most colleges of engineering and medicine affiliated to the University of Mumbai, though, are privately owned. The university does not have its own engineering or medicine departments.
 
-    <div id="grid-container">
-    </div>
-    <center>
-        <div id="moveResultDiv">
-            <p id="yesMove" style="display:none"></p>
-            <p id="noMove">There are no Results to be moved.</p>
-            <button id="resultUpload" onclick="window.location='moveIt.php'" style="display:none">Move It!</button>
-        </div>
-    </center>
-    <script>
-        console.log("movin it!");
-        var filesCheck = <?php $out = array();
-                            foreach (glob('../input/*') as $filename)
-                                $out[] = pathinfo($filename);
-                            echo json_encode($out);
-                            ?>;
-        if (filesCheck[0]) {
-            document.getElementById("resultUpload").style.display = "";
-            document.getElementById("yesMove").innerHTML = "There are " + filesCheck.length + " Results to be moved.";
-            document.getElementById("noMove").style.display = "none";
-            document.getElementById("yesMove").style.display = "";
-        }
-    </script>
+Centres and institutes located in the Kalina Campus include:
+
+Examination House, also known as Mahatma Jyotirao Phule Bhavan houses the office of the Controller of Examinations. Centralized assessment of answer books for various departments is carried out in a separate four-storey annexe. Examination processes were made more efficient by the introduction of online delivery of question papers for examinations, and assessment of answer books by scanning at remote examination centres. The academic depository of the university was started in collaboration with CDSL in 2015. The university is the first university in the country to start an academic depository. [11]
+National Centre for Nanosciences and Nanotechnology — a research facility
+Department of Biophysics — the only such department in western India
+Jawaharlal Nehru Library</p><br>
+<img src="images/kalina.jpg" >
+<br><br>
+</div>
+		
+	
+		</section>
 
 
+	
 <!-- footer -->
-<footer class="site-footer" style="padding: 2em 0;   bottom: 0; width: 100%;   position: relative;">
+<footer class="site-footer" style="padding: 2em 0;   bottom: 0; width: 100%; position:relative;">
         <div class="container">
             <div class="row">
                 <div class="col-md-9">

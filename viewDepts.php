@@ -2,13 +2,13 @@
 
 // Initialize the session
 session_start();
+
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if (!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"] === true) {
-    header("location: ../index.php");
+if(!isset($_SESSION["loggedin"]) && !$_SESSION["loggedin"] === true){
+    header("location: index.php");
     exit;
-} 
-if ($_SESSION["isadmin"] == 0) {
-    header("location: ../viewResults.php");
+} else if($_SESSION["isadmin"]){
+    header("location: admin/viewUsers.php");
     exit;
 }
 
@@ -16,26 +16,18 @@ if ($_SESSION["isadmin"] == 0) {
 <html>
 
 <head>
-    
-<title>Create Department</title>
-
-<!-- Navbar -->
+    <title>Results</title>
+    <link rel="stylesheet" href="viewResults.css">
+     <!-- Navbar -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
-<link rel="stylesheet" href="../fonts/icomoon/style.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/navbarStyle.css">
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/navbarStyle.css">
 <!-- Navbar ends -->
-
-    <style>
-    </style>
-    <title>Results</title>
-    <link rel="stylesheet" href="moveResults.css">
 </head>
-
-<!-- Navbar -->
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -84,26 +76,13 @@ if ($_SESSION["isadmin"] == 0) {
                         <nav class="site-navigation position-relative text-right" role="navigation">
 
                             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                                <li><a href="#home-section" class="nav-link">Home</a></li>
-                                <li><a href="./moveResults.php" class="nav-link">Results</a></li>
-                                <li class="has-children">
-                                    <a href="" class="nav-link">Departments</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./viewDepts.php">View Departments</a></li>
-                                        <li><a href="./createDept.php">Add Department</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-children">
-                                    <a href="" class="nav-link">Users</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./viewUsers.php">View Users</a></li>
-                                        <li><a href="./createUser.php">Add Users</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="index.php" class="nav-link">Home</a></li>
+                                <li><a href="viewResults.php" class="nav-link">Results</a></li>
+                                <li> <a href="viewDepts.php" class="nav-link">Departments</a></li>
                                 <li class="has-children"><a href="" class="nav-link">My Account</a>
                                     <ul class="dropdown">
-                                        <li><a href="../changePassword.php">Change Password</a></li>
-                                        <li><a href="../logout.php">Logout</a></li>
+                                        <li><a href="changePassword.php">Change Password</a></li>
+                                        <li><a href="logout.php">Logout</a></li>
                                     </ul></li>
                             </ul>
                         </nav>
@@ -116,38 +95,90 @@ if ($_SESSION["isadmin"] == 0) {
 
         </header>
 
-    </div> <!-- .site-wrap -->
-
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <!-- Navbar ends -->
-
-    <div id="grid-container">
-    </div>
-    <center>
-        <div id="moveResultDiv">
-            <p id="yesMove" style="display:none"></p>
-            <p id="noMove">There are no Results to be moved.</p>
-            <button id="resultUpload" onclick="window.location='moveIt.php'" style="display:none">Move It!</button>
-        </div>
-    </center>
-    <script>
-        console.log("movin it!");
-        var filesCheck = <?php $out = array();
-                            foreach (glob('../input/*') as $filename)
-                                $out[] = pathinfo($filename);
-                            echo json_encode($out);
-                            ?>;
-        if (filesCheck[0]) {
-            document.getElementById("resultUpload").style.display = "";
-            document.getElementById("yesMove").innerHTML = "There are " + filesCheck.length + " Results to be moved.";
-            document.getElementById("noMove").style.display = "none";
-            document.getElementById("yesMove").style.display = "";
-        }
-    </script>
-
+        <br><br><br><br>
+        <section class="categories-section spad" id="courses">
+		<div class="container">
+			<div class="section-title">
+				<h2>Our Course Categories</h2>
+				<p>Over special courses provides the best exposure with the practical knowlege and one of the best tutors that you can ever have.</p><br><br><br>
+			</div>
+			<div class="row">
+				<!-- categorie -->
+				<div class="col-lg-4 col-md-6">
+					<div class="categorie-item">
+						<div class="ci-thumb set-bg" data-setbg="img/categories/1.jpg"></div>
+						<div class="ci-text">
+							<h5>IT Development</h5>
+							<p>Software can be developed for a variety of purposes, the three most common being to meet specific needs of a specific client/business </p>
+							
+						</div>
+					</div>
+				</div>
+				<!-- categorie -->
+				<div class="col-lg-4 col-md-6">
+					<div class="categorie-item">
+						<div class="ci-thumb set-bg" data-setbg="img/categories/2.jpg"></div>
+						<div class="ci-text">
+							<h5>Web Design</h5>
+							<p>Marketing and communication design on a website may identify what works for its target market, attract more audience and 
+								make more money out of it.
+							</p>
+							
+						</div>
+					</div>
+				</div>
+				<!-- categorie -->
+				<div class="col-lg-4 col-md-6">
+					<div class="categorie-item">
+						<div class="ci-thumb set-bg" data-setbg="img/categories/3.jpg"></div>
+						<div class="ci-text">
+							<h5>Illustration & Drawing</h5>
+							<p>A drawing is often an exploratory form of visual art. This means that drawings pay considerable emphasis on observation, 
+								problem solving and composition</p><br><br>
+							
+						</div>
+					</div>
+				</div>
+				<!-- categorie -->
+				<div class="col-lg-4 col-md-6">
+					<div class="categorie-item">
+						<div class="ci-thumb set-bg" data-setbg="img/categories/4.jpg"></div>
+						<div class="ci-text">
+							<h5>Data Science</h5>
+							<p>The Sexiest Job of the 21st Century", DJ Patil claims to have coined this term in 2008 with Jeff Hammerbacher to define their jobs at LinkedIn and Facebook, respectively.</p>
+							
+						</div>
+					</div>
+				</div>
+				<!-- categorie -->
+				<div class="col-lg-4 col-md-6">
+					<div class="categorie-item">
+						<div class="ci-thumb set-bg" data-setbg="img/categories/5.jpg"></div>
+						<div class="ci-text">
+							<h5>App Development</h5>
+							<p>Mobile app development is becoming more critical for many businesses with more than 3 billion people worldwide using smartphones.</p>
+						
+						</div>
+					</div>
+				</div>
+				<!-- categorie -->
+				<div class="col-lg-4 col-md-6">
+					<div class="categorie-item">
+						<div class="ci-thumb set-bg" data-setbg="img/categories/6.jpg"></div>
+						<div class="ci-text">
+							<h5>Cryptocurrencies</h5>
+							<p>A cryptocurrency  is a digital asset designed to work as a medium of exchange that uses strong cryptography to secure financial transactions.</p>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 <!-- footer -->
-<footer class="site-footer" style="padding: 2em 0;   bottom: 0; width: 100%;   position: relative;">
+<footer class="site-footer" style="padding: 2em 0;   top:80%;  bottom: 0; width: 100%;">
+
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
